@@ -12,6 +12,6 @@ WORKDIR /app
 COPY --from=builder /app/main /app/main
 COPY --from=builder /app/docs /app/docs
 # Copy .env jika digunakan (tidak recommended untuk production)
-COPY --from=builder /app/.env /app/.env 
+# COPY --from=builder /app/.env /app/.env 
 EXPOSE 8000
 CMD ["/app/main"]

@@ -644,7 +644,7 @@
     "/fe/contents/{id}" : {
       "get" : {
         "description": "API for Content.",
-        "tags": ["content"],
+        "tags": ["frontend API"],
         "summary": "Get a content by ID",
         "parameters": [
           {
