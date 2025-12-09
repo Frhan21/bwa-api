@@ -13,7 +13,12 @@ type Postgress struct {
 }
 
 func (cfg Config) ConnectionPostgress() (*Postgress, error) {
-	dbConnString := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", cfg.PsqlDB.User, cfg.PsqlDB.Password, cfg.PsqlDB.Host, cfg.PsqlDB.Port, cfg.PsqlDB.DBName)
+
+	sslMode := cfg.PsqlDB.SSLMode
+	if sslMode == "" {
+		sslMode = "disable"
+	}
+	dbConnString := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s", cfg.PsqlDB.User, cfg.PsqlDB.Password, cfg.PsqlDB.Host, cfg.PsqlDB.Port, cfg.PsqlDB.DBName, sslMode)
 
 	db, err := gorm.Open(postgres.Open(dbConnString), &gorm.Config{}) // Use gorm.io/driver/postgres
 	if err != nil {

@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS "contents" (
     excerpt VARCHAR(200) NOT NULL,
     description TEXT NOT NULL,
     image TEXT NULL,
+    public_id VARCHAR(200) NULL,
     status VARCHAR(20) NOT NULL,
     tags TEXT NOT NULL, 
     created_at TIMESTAMP DEFAULT NOW(),

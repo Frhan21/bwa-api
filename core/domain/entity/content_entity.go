@@ -8,6 +8,7 @@ type ContentEntity struct {
 	Excerpt     string
 	Description string
 	Image       string
+	PublicId    string
 	Category    CategoryEntity
 	User        UserEntity
 	Tags        []string

@@ -12,6 +12,7 @@ type Content struct {
 	Status      string     `grom:"status"`
 	Description string     `gorm:"description"`
 	Image       string     `gorm:"image"`
+	PublicId    string     `gorm:"public_id"`
 	CreatedAt   time.Time  `gorm:"created_at"`
 	UpdatedAt   *time.Time `gorm:"updated_at"`
 	Category    Category   `gorm:"foreignKey:CategoryID"`

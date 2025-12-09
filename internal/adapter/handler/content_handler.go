@@ -59,6 +59,7 @@ func (ch *contentHandler) GetContentDetail(c *fiber.Ctx) error {
 		Excerpt:     res.Excerpt,
 		Description: res.Description,
 		Image:       res.Image,
+		PublicId:    res.PublicId,
 		Tags:        res.Tags,
 		Status:      res.Status,
 		CategoryId:  res.CategoryId,
@@ -548,7 +549,7 @@ func (ch *contentHandler) UploadImage(c *fiber.Ctx) error {
 		Path: req.Image,
 	}
 
-	imgUrl, err := ch.contentService.UploadImage(c.Context(), reqEntity)
+	uploadRes, err := ch.contentService.UploadImage(c.Context(), reqEntity)
 	if err != nil {
 		code = "[CONTENT HANDLER] Upload Image -4"
 		log.Errorw(code, err)
@@ -572,7 +573,8 @@ func (ch *contentHandler) UploadImage(c *fiber.Ctx) error {
 	}
 
 	imageUrlResp := map[string]interface{}{
-		"urlImage": imgUrl,
+		"url":       uploadRes.Url,
+		"public_id": uploadRes.PublicId,
 	}
 
 	defaultResponse.Meta.Status = true

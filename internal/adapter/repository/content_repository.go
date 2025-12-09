@@ -78,6 +78,7 @@ func (c *contentRepository) GetContentByID(ctx context.Context, id int64) (*enti
 		Excerpt:     modelContent.Excerpt,
 		Description: modelContent.Description,
 		Image:       modelContent.Image,
+		PublicId:    modelContent.PublicId,
 		CategoryId:  modelContent.CategoryID,
 		CreatedAt:   modelContent.CreatedAt,
 		User: entity.UserEntity{
@@ -140,6 +141,7 @@ func (c *contentRepository) GetContents(ctx context.Context, query entity.QueryS
 			Excerpt:     val.Excerpt,
 			Description: val.Description,
 			Image:       val.Image,
+			PublicId:    val.PublicId,
 			CategoryId:  val.CategoryID,
 			CreatedAt:   val.CreatedAt,
 			User: entity.UserEntity{
@@ -169,6 +171,7 @@ func (c *contentRepository) UpdateContent(ctx context.Context, req entity.Conten
 		Excerpt:     req.Excerpt,
 		Description: req.Description,
 		Image:       req.Image,
+		PublicId:    req.PublicId,
 		CategoryID:  req.CategoryId,
 		UserID:      req.User.ID,
 		Tags:        tags,

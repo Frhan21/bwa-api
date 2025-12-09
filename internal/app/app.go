@@ -3,7 +3,7 @@ package app
 import (
 	"bwa-api/config"
 	"bwa-api/core/service"
-	"bwa-api/internal/adapter/cloudflare"
+	"bwa-api/internal/adapter/cloudinary"
 	"bwa-api/internal/adapter/handler"
 	"bwa-api/internal/adapter/repository"
 	"bwa-api/libs/auth"
@@ -14,7 +14,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/gofiber/contrib/swagger"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -40,11 +39,14 @@ func RunServer() {
 	}
 
 	// CloudFlare
-	cfR2 := cfg.LoadAwsConfig()
-	s3Client := s3.NewFromConfig(cfR2)
-	r2Adapter := cloudflare.NewCloudFlareR2Adapter(s3Client, cfg)
+	// cfR2 := cfg.LoadAwsConfig()
+	// s3Client := s3.NewFromConfig(cfR2)
+	// r2Adapter := cloudflare.NewCloudFlareR2Adapter(s3Client, cfg)
 	jwt := auth.NewJwt(cfg)
 	middlewareAuth := middleware.NewMiddleware(cfg)
+
+	// Cloudinary
+	cldAdapter := cloudinary.NewCloudinaryAdapter(cfg)
 
 	_ = pagination.Pagination()
 
@@ -57,7 +59,7 @@ func RunServer() {
 	// Service
 	authServe := service.NewAuthService(authRepo, cfg, jwt)
 	categoryServe := service.NewCategoryService(categoryRepo)
-	contentServe := service.NewContentService(contentRepo, cfg, r2Adapter)
+	contentServe := service.NewContentService(contentRepo, cfg, cldAdapter)
 	userServe := service.NewUserService(userRepo)
 
 	// Handler

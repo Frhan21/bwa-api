@@ -6,6 +6,7 @@ type ContentResponse struct {
 	Excerpt     string   `json:"excerpt"`
 	Description string   `json:"description" omitempty:"description"`
 	Image       string   `json:"image"`
+	PublicId    string   `json:"public_id" omitempty:"public_id"`
 	Tags        []string `json:"tags" omitempty:"tags"`
 	Status      string   `json:"status" omitempty:"status"`
 	CategoryId  int64    `json:"category_id" omitempty:"category_id"`
